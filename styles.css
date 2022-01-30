@@ -1,0 +1,150 @@
+* {
+    box-sizing: border-box;
+}
+.container{
+    user-select: none;
+    display: grid;
+    justify-content: space-around;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    overflow: auto;
+    margin: auto;
+    width: 60%;
+}
+@media only screen and (max-width: 900px) {
+    .topics {
+        width: 100%;
+    }
+    .container{
+        width: 100%;
+    }
+}
+
+.topics{
+    margin: 5px auto 20px auto;
+    width: 350px;
+    float: left;
+}
+
+.topic_name {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 32px 5px 32px;
+    overflow: hidden;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 0 0 1px rgb(0 0 0 / 5%), 0 2px 3px 0 rgb(0 0 0 / 10%);
+    box-shadow: 0 0 0px 0px rgb(0 0 0/ 10%), 0 10px 10px 0 rgb(0 0 0 / 30%);
+    background: #fff;
+    text-align: center;
+    border-left: 3px solid red;
+}
+
+.calculator {
+    display: grid;
+    justify-content: space-around;
+    grid-template-columns: 33% 33% 33%;
+    grid-gap: 4px 0px;
+    background-color: #137f90;
+    padding: 25px 0px 10px 0px;
+    /* border-top-right-radius: 5px;
+    border-top-left-radius: 5px; */
+}
+.grid-item {
+    padding: 5px 5px;  
+    width: 90%;
+    outline: none;
+    border-radius: 4px;
+    margin: auto;
+    font-size: 25px;
+    text-align: center;
+    border: none;
+    }
+.grid-item:active{
+    background-color: lightgrey;
+    font-size: 140%;
+    transform: translate3d(2px,2px,0px);
+    transition-duration: 0.001ms;
+}
+.clear{
+    background-color:#F79F1F;
+}
+.backspace{
+    background-color: #A3CB38;
+    font-size: 21px;
+}
+.sign{
+    background-color: #D980FA;
+}
+.item1{
+    font-size: 25px;
+    color: white;
+    padding: 15px;
+}
+.item2, .item3{
+    border : 0px 15px 0px 15px #137f90;
+}
+
+input[type=text] {
+    font-size: 25px;
+    text-align: right;
+    font-family: 'Times New Roman', Times, serif;
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+#Input{
+    border: solid #137f90;
+    border-width: 10px 10px;
+}
+#Input:focus{
+    border: solid #116e7c;
+    border-width: 10px 10px;
+}
+
+#Result {
+    font-size: 29px;
+    border: solid#137f90;
+    border-width: 0px 10px;
+}
+.section{
+    background: #137f90;
+    display: block;
+    padding: 10px 3px;
+    font-size: 25px;
+    color: white;
+}
+.para{
+    animation-name: example;
+    animation-duration: 10s;
+    animation-delay: 2s;
+}
+
+@keyframes example {
+    0%   {color:red; left:0px; top:0px;}
+    25%  {color:yellow; left:20px; top:0px;}
+    50%  {color:blue; left:200px; top:200px;}
+    75%  {color:green; left:0px; top:200px;}
+    100% {color:red; left:0px; top:0px;}
+}
+a:link {
+    text-decoration: none;
+}
+
+a:hover {
+    font-size: 140%;
+    transform: translate3d(4px);
+}
+p{
+    font-size: 17px;
+    padding: 4px 17px;
+    margin: 0px;
+    text-align: justify;
+}
+h3{
+    margin: 2px;
+    text-align: left;
+    text-decoration: underline;
+    padding: 2px 10px;
+}
