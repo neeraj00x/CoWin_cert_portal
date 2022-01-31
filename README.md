@@ -1,7 +1,7 @@
 # Portal to download Certificate for COVID-19 Vaccination
 ## Build as an assignment during GI Project
 * Eperimented with Fetch API and learnt how to get a PDF as response from server.
-* Modified my <b>Absolute Value Calculator</b> into an Open Source Web Portal to download Certificate for COVID-19 Vaccination
+* Modified my [<b>Absolute Value Calculator</b>](https://neeraj00x.github.io/mod_calculator/) into an Open Source Web Portal to download Certificate for COVID-19 Vaccination
 Issued in India by Ministry of Health & Family Welfare, Govt. of India.
 <br/><br/>
 ### How it looks on Firefox-
