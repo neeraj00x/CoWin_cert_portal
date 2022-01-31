@@ -54,13 +54,12 @@
     outline: none;
     border-radius: 4px;
     margin: auto;
-    font-size: 25px;
+    font-size: 13px;
     text-align: center;
     border: none;
     }
 .grid-item:active{
     background-color: lightgrey;
-    font-size: 140%;
     transform: translate3d(2px,2px,0px);
     transition-duration: 0.001ms;
 }
@@ -69,7 +68,6 @@
 }
 .backspace{
     background-color: #A3CB38;
-    font-size: 21px;
 }
 .sign{
     background-color: #D980FA;
@@ -123,9 +121,7 @@ input[type=text] {
 
 @keyframes example {
     0%   {color:red; left:0px; top:0px;}
-    25%  {color:yellow; left:20px; top:0px;}
     50%  {color:blue; left:200px; top:200px;}
-    75%  {color:green; left:0px; top:200px;}
     100% {color:red; left:0px; top:0px;}
 }
 a:link {
@@ -137,10 +133,10 @@ a:hover {
     transform: translate3d(4px);
 }
 p{
-    font-size: 17px;
+    font-size: 25px;
     padding: 4px 17px;
     margin: 0px;
-    text-align: justify;
+    text-align: center;
 }
 h3{
     margin: 2px;
