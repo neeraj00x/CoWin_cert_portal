@@ -5,4 +5,4 @@
 Issued in India by Ministry of Health & Family Welfare, Govt. of India.
 
 
-![alt text](https://github.com/neeraj00x/CoWin_cert_portal/blob/new/Screenshot.png?raw=true)
+![alt text](https://github.com/neeraj00x/CoWin_cert_portal/blob/new/Screenshot.png?raw=true
