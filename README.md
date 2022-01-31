@@ -6,5 +6,4 @@ Issued in India by Ministry of Health & Family Welfare, Govt. of India.
 <br/><br/>
 ### How it looks on Firefox-
 <br/><br/>
-
 ![alt text](https://github.com/neeraj00x/CoWin_cert_portal/blob/master/Screenshot.png)
