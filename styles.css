@@ -20,7 +20,7 @@
 
 .topics{
     margin: 50px auto 20px auto;
-    width: 400px;
+    width: 380px;
     float: left;
 }
 
@@ -46,7 +46,7 @@
     font-size: 15px;
     text-align: center;
     border: none;
-    background-color: #A3CB38;
+    background-color: red;
     color: white;
     cursor: pointer;
     -webkit-box-shadow: 0 0 0 1px rgb(0 0 0 / 5%), 0 2px 3px 0 rgb(0 0 0 / 50%);
@@ -82,7 +82,7 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+::placeholder {
     color: white;
     opacity: 1; /* Firefox */
 }
@@ -97,7 +97,6 @@ input:focus{
 
 .item1{
     font-size: 25px;
-    /* border-bottom: 4px solid red; */
     color: white;
     padding: 15px 20px;
     background-color: #185963;
