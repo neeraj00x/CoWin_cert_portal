@@ -5,6 +5,6 @@
 Issued in India by Ministry of Health & Family Welfare, Govt. of India.
 * To access the portal [<b><i>Click here!</i></b>](https://neeraj00x.github.io/CoWin_cert_portal/)
 <br/><br/>
-### How it looks on Firefox-
+### How it looks on Chrome-
 <br/><br/>
 ![alt text](https://github.com/neeraj00x/CoWin_cert_portal/blob/master/Screenshot.png)
