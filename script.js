@@ -1,12 +1,10 @@
 const buttonValue = document.querySelectorAll("button")
 const screenValue = document.querySelector("#Input");
-const dispValue = document.querySelector("#Result");
 let isNumber;
 let BenefId;
 function refreshCalculator() {
     isNumber = true;
     screenValue.value = ''
-    dispValue.value = ''
 }
 
 refreshCalculator();
@@ -15,46 +13,13 @@ buttonValue.forEach(element => {
 
         let buttonText = e.target.innerText;
 
-        if (buttonText === "C") {
-            refreshCalculator();
-        }
-        else if (buttonText === '.' && isNumber && !screenValue.value.includes('.') ) {
-            if (screenValue.value == ''){
-                screenValue.value += '0.';
-            }
-            else {
-                screenValue.value += buttonText;
-            }
-        }
-
-        else if (buttonText === "Send Ben Id") {
+        if (buttonText === "Proceed" && screenValue.value.toString().length ==14 ) {
             BenefId = screenValue.value;
             screenValue.value = ''
-            document.getElementById("head").innerHTML = "Enter Mobile Number"
-            document.getElementById("inst").innerHTML = `Now enter Mobile Number and <br><b>HIT</b> <br> <i>'Get OTP'</i> <br>Button to get OTP...`
+            document.getElementById("label").innerHTML = "Mobile Number"
+            document.getElementById("button").innerHTML = `<button class="grid-item sign" onclick="getOTP(screenValue.value)" >Get OTP</button>`
         }
-
-        else if (buttonText === "Get OTP") {
-            Show(screenValue.value);
-            screenValue.value = ''
-            document.getElementById("head").innerHTML = "Enter OTP"
-            document.getElementById("inst").innerHTML = `Got an OTP?<br>Enter your OTP fom <b>CoWin</b> and <br><b>HIT</b> <br> <i>'Get Cert'</i> <br>Button to download your vaccination certificate!`
-        }
-
-        else if (buttonText >= '0' && buttonText <= 9 && isNumber) {
-            if (screenValue.value === '0') {
-                screenValue.value = buttonText;
-            }
-            else {
-                screenValue.value += buttonText;
-            }
-        }
-        else if (buttonText === "GET Cert") {
-            ValidateOTP(screenValue.value);
-            isNumber = false;
-            document.getElementById("head").innerHTML = "Done!"
-            document.getElementById("inst").innerHTML = "<i><b>Thank You for using this portal</b></i>"
-        }
+        else alert('Enter correct Beneficiary Id')
     })
 });
 
@@ -71,7 +36,8 @@ async function hash(string) {
 }
 
 async function GetId(str){
-    await fetch("https://cdn-api.co-vin.in/api/v2/auth/public/generateOTP",{
+    try{
+        await fetch("https://cdn-api.co-vin.in/api/v2/auth/public/generateOTP",{
                 method: 'POST',
                 body: JSON.stringify({
                     "mobile": str
@@ -81,67 +47,84 @@ async function GetId(str){
                 }
             })
             .then(function(response){return response.json()})
-            .then(function(data){console.log(data); txn = data.txnId})
-    return txn
+            .then(function(data){txn = data.txnId})
+        return txn
+        }
+        catch(err){
+            alert('Too many requests!');
+        }
 }
 
 async function GetToken(str){
-    let Token = await fetch("https://cdn-api.co-vin.in/api/v2/auth/public/confirmOTP",{
-                        method: 'POST',
-                        body: JSON.stringify(
-                            {
-                                "otp": otp,
-                                "txnId": txnid
-                            }
-                        ),
-                        headers: {
-                            "Content-Type": "application/json; charset = UTF-8"
-                        }
-                    })
-                    .then(function(response){return response.json()})
-                    .then(function(data){tkn = data.token
-                    console.log(data,'abc')
-                    })
+    await fetch("https://cdn-api.co-vin.in/api/v2/auth/public/confirmOTP",{
+            method: 'POST',
+            body: JSON.stringify(
+                {
+                    "otp": str,
+                    "txnId": txnid
+                }
+            ),
+            headers: {
+                "Content-Type": "application/json; charset = UTF-8"
+            }
+        })
+        .then(function(response){return response.json()})
+        .then(function(data){tkn = data.token})
     return tkn
 }
 
-async function Show(str){
-    txnid = await GetId(str),
-    await console.log(txnid);
+async function getOTP(str){
+    try{
+        if(screenValue.value.toString().length==10){
+
+            screenValue.value = ''
+            document.getElementById("label").innerHTML = "Enter OTP"
+            document.getElementById("button").innerHTML = `<button class="grid-item AbsBtn" style="background-color: red; color: white;" onclick="ValidateOTP(screenValue.value)">Verify & Download</button>`
+            
+            txnid = await GetId(str)
+
+        }else(alert('Mobile Number must contain 10 digits'))
+    }
+    catch(err){alert(err.message)}
 }
 
+
 async function ValidateOTP(str){
-    otp = await hash(str)
-    token = await GetToken(str)
-    let url = `https://cdn-api.co-vin.in/api/v2/registration/certificate/public/download?beneficiary_reference_id=${BenefId}`
-    fetch(url,{
-        headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json; charset = UTF-8",
-                "accept" : "application/pdf"
+    if (screenValue.value.toString().length==6){
+
+        screenValue.value = ''
+        otp = await hash(str)
+        token = await GetToken(otp)
+        let url = `https://cdn-api.co-vin.in/api/v2/registration/certificate/public/download?beneficiary_reference_id=${BenefId}`
+        fetch(url,{
+            headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json; charset = UTF-8",
+                    "accept" : "application/pdf"
+                }
+        })   
+        .then(async res => ({
+            filename: 'certificate',
+            blob: await res.blob()
+        }))
+        .then(resObj => {
+            
+            const newBlob = new Blob([resObj.blob], { type: 'application/pdf' });
+            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                window.navigator.msSaveOrOpenBlob(newBlob);
+            } else {
+                const objUrl = window.URL.createObjectURL(newBlob);
+                let link = document.createElement('a');
+                link.href = objUrl;
+                link.download = resObj.filename;
+                link.click();
+                setTimeout(() => { window.URL.revokeObjectURL(objUrl); }, 250);
             }
-    })   
-    .then(async res => ({
-        filename: 'certificate',
-        blob: await res.blob()
-    }))
-    .then(resObj => {
-        
-        const newBlob = new Blob([resObj.blob], { type: 'application/pdf' });
-        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-            window.navigator.msSaveOrOpenBlob(newBlob);
-        } else {
-            const objUrl = window.URL.createObjectURL(newBlob);
-            let link = document.createElement('a');
-            link.href = objUrl;
-            link.download = resObj.filename;
-            link.click();
-            setTimeout(() => { window.URL.revokeObjectURL(objUrl); }, 250);
-        }
-    })
-    .catch((error) => {
-        console.log('DOWNLOAD ERROR', error);
-    });
-    await console.log(token)
+        })
+        .catch((error) => {
+            console.log('DOWNLOAD ERROR', error);
+        });
+
+    }else(alert('Enter correct OTP'))
 }
 
