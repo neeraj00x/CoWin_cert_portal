@@ -1,5 +1,5 @@
 # Portal to download Certificate for COVID-19 Vaccination
-## Build as an assignment during GI Project
+## Build as an assignment during GI Project [[Mentor: Snehil Saluja](https://github.com/mrsnhl)]
 * Eperimented with Fetch API and learnt how to get a PDF as response from server.
 * Developed this Open Source Web Portal to download Certificate for COVID-19 Vaccination
 Issued in India by Ministry of Health & Family Welfare, Govt. of India.
